@@ -30,19 +30,24 @@
         @deleteProject="deleteProject"
       />
     </div>
-    <div class="row" v-else>
-      <div class="content col s12">
-        <div class="shadows">
-          <span>p</span>
-          <span>r</span>
-          <span>o</span>
-          <span>y</span>
-          <span>e</span>
-          <span>c</span>
-          <span>t</span>
-          <span>o</span>
-          <span>s</span>
-        </div>
+    <div v-else class="row dont-projects">
+      <div class="shadows col s12 l12">
+        <span>C</span>
+        <span>r</span>
+        <span>E</span>
+        <span>A</span>
+        <span>-</span>
+        <span>U</span>
+        <span>N</span>
+        <span>-</span>
+        <span>P</span>
+        <span>R</span>
+        <span>O</span>
+        <span>Y</span>
+        <span>E</span>
+        <span>C</span>
+        <span>T</span>
+        <span>O</span>
       </div>
     </div>
   </div>
@@ -86,11 +91,19 @@ export default {
       const index = this.projects.findIndex((project) => project.id === id);
       this.projects.splice(index, 1);
     },
+   
   },
+  
 };
 </script>
 
 <style scoped>
+.dont-projects {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
 .content {
   display: flex;
   align-items: center;
@@ -99,23 +112,22 @@ export default {
 .shadows {
   position: relative;
   text-transform: uppercase;
-  text-shadow: -15px 5px 20px #5e5e5f;
+  text-shadow: -15px 5px 20px #ced0d3;
   color: white;
   letter-spacing: -0.05em;
   font-family: "Anton", Arial, sans-serif;
   user-select: none;
   text-transform: uppercase;
-  font-size: 100px;
+  font-size: 80px;
   transition: all 0.25s ease-out;
 }
 .shadows:hover {
-  text-shadow: -16px 6px 15px #313131;
+  text-shadow: -16px 6px 15px #ced0d3;
 }
 .new-project {
   margin: 10px;
 }
 svg {
-  /* background-color: lightseagreen; */
   display: block;
   font: 12.5em "Montserrat";
   max-width: 620px;

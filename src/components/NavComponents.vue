@@ -8,13 +8,13 @@
         ><i class="material-icons">menu</i></a
       >
       <ul class="right hide-on-med-and-down">
-        <li v-if="!protectRoute">
+        <li v-if="!authenticated">
           <router-link :to="{ name: 'Login' }">Iniciar Sesión</router-link>
         </li>
-        <li v-if="!protectRoute">
+        <li v-if="!authenticated">
           <router-link :to="{ name: 'Register' }">Registrarse</router-link>
         </li>
-        <li v-if="protectRoute">
+        <li v-if="authenticated">
           <router-link
             class="
               waves-effect waves-light
@@ -38,17 +38,17 @@
   </nav>
 
   <ul class="sidenav" id="mobile-demo">
-    <li><router-link v-if="!protectRoute" to="/">Registrarse</router-link></li>
+    <li><router-link v-if="!authenticated" to="/">Registrarse</router-link></li>
     <li>
-      <router-link v-if="!protectRoute" to="/login">Iniciar sesión</router-link>
+      <router-link v-if="!authenticated" to="/login">Iniciar sesión</router-link>
     </li>
     <li>
-      <router-link v-if="protectRoute" :to="{ name: 'Projects' }"
+      <router-link v-if="authenticated" :to="{ name: 'Projects' }"
         >Proyectos</router-link
       >
     </li>
     <div class="row">
-      <button @click="logout" class="waves-effect waves-light btn col s12">
+      <button v-if="authenticated" @click="logout" class="waves-effect waves-light btn col s12">
         <i class="material-icons right">exit_to_app</i>Cerrar Sesión
       </button>
     </div>
@@ -56,23 +56,30 @@
 </template> 
 <script>
 import route from "@/router/index.js";
-import router from "../router";
 export default {
   name: "NavComponent",
+  data(){
+    return {
+      authenticated: false
+    }
+  },
   mounted() {
     M.AutoInit();
   },
   methods: {
     logout() {
       localStorage.removeItem("user");
-      router.push({ name: "Login" });
+      this.authenticated = false;
+      route.push({ name: "Login" });
     },
   },
   computed: {
     protectRoute() {
       if (localStorage.getItem("user") != undefined) {
+        this.authenticated = true;
         return true;
       }
+      this.authenticated = false;
       return false;
     },
   },

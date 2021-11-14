@@ -106,7 +106,6 @@ export default {
           }
         );
         const data = await response.json();
-        console.log(data);
         if (data.error) {
           this.error = data.error.errors[0].message;
         } else {
